@@ -1,0 +1,25 @@
+{
+    "name": "jvmtech/media-export",
+    "description": "Export Media Assets",
+    "type": "neos-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stefan Bruggmann",
+            "homepage": "https://twitter.com/sbruggm4nn"
+        }
+    ],
+    "require": {
+        "neos/media": "~4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "JvMTECH\\MediaExport\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "JvMTECH.MediaExport"
+        }
+    }
+}
