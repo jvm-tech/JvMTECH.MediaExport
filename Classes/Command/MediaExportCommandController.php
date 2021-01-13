@@ -108,13 +108,21 @@ class MediaExportCommandController extends CommandController
 
             $resource = $asset->getResource()->getStream();
 
+            $tagLabels = array_map(function($tag){
+                return $tag->getLabel();
+            }, $asset->getTags()->toArray());
+
+            $assetCollectionTitles = array_map(function($assetCollection){
+                return $assetCollection->getTitle();
+            }, $asset->getAssetCollections()->toArray());
+
             $meta = [
                 'identifier' => $asset->getIdentifier(),
                 'title' => $asset->getTitle(),
                 'caption' => $asset->getCaption(),
                 'lastModified' => $asset->getLastModified()->getTimestamp(),
-                'tags' => $asset->getTags()->toArray(),
-                'assetCollections' => $asset->getAssetCollections()->toArray(),
+                'tags' => $tagLabels,
+                'assetCollections' => $assetCollectionTitles,
             ];
 
             file_put_contents(FLOW_PATH_DATA . 'MediaExport/' . $asset->getResource()->getFilename(), stream_get_contents($resource));
