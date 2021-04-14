@@ -88,12 +88,6 @@ class MediaExportCommandController extends CommandController
             if (!$asset instanceof Asset) {
                 continue;
             }
-            if (!$asset instanceof AssetSourceAwareInterface) {
-                continue;
-            }
-            if ($filterByAssetSourceIdentifier !== '' && $asset->getAssetSourceIdentifier() !== $filterByAssetSourceIdentifier) {
-                continue;
-            }
             if ($onlyTags !== '' && $assetTagsMatchFilterTags($asset->getTags(), $onlyTags) === false) {
                 continue;
             }
@@ -130,7 +124,7 @@ class MediaExportCommandController extends CommandController
 
             $fileSize = str_pad(Files::bytesToSizeString($asset->getResource()->getFileSize()), 9, ' ', STR_PAD_LEFT);
 
-            $tableRowsByAssetSource[$asset->getAssetSourceIdentifier()][] = [
+            $tableRowsByAssetSource['fixed'][] = [
                 $asset->getIdentifier(),
                 $asset->getResource()->getFilename(),
                 $fileSize
